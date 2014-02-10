@@ -7,7 +7,7 @@ class Solution:
         for ele in A[1:]:
             twos |= ones&ele
             ones ^= ele
-            three = ones^twos
+            three = ones&twos
             ones &= ~three
             twos &= ~three
         return ones
