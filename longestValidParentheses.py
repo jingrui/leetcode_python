@@ -2,27 +2,20 @@ class Solution:
     # @param s, a string
     # @return an integer
     def longestValidParentheses(self, s):
-        ql = []
-        qr = []
-        count = list(s)
-        for i,ele in enumerate(s):
+        q= []
+        longest = 0
+        count = 0
+        for ele in s:
             if ele == '(':
-                ql.append(i)
-            else:#')'
-                if len(ql)>0:
-                    top = ql[-1]
-                    del ql[-1]
-                    count[top]=1
-                    count[i]=1
-                else:
-                    qr.append(i)
-        # print count
-        count = ''.join(map(str,count))
-        # print count
-        count = count.replace('(',' ')
-        count = count.replace(')',' ')
-        # print count
-        count = count.split()
-        # print count
-        if len(count) == 0: return 0
-        return max(map(len,count))
+                q.append('(')
+            else:
+                if len(q)>0:
+                    top = q[-1]
+                    if top == '(':
+                        count +=1
+                        del q[-1]
+                    else:
+                        count = 0
+            longest = count if count > longest else longest
+        return longest*2
+            
